@@ -15,7 +15,7 @@ describe("MyList tests", () => {
   const l1 = new MyList(1, 2, 3);
   const l2 = new MyList("Hello", "world", "!");
   const l3 = new MyList({}, {});
-  const l4 = new MyList();
+  const l4 = new MyList<number>();
 
   it("toString test", () => {
     test("1 2 3", l1.ToString());
@@ -26,7 +26,7 @@ describe("MyList tests", () => {
     const l1c = new MyList(1, 2, 3);
     const l2c = new MyList("Hello", "world", "!");
     const l3c = new MyList({}, {});
-    const l4c = new MyList();
+    const l4c = new MyList<number>();
 
     test(l1.isEqual(l1c), true);
     test(l1.isEqual(new MyList(1, 2)), false);
@@ -43,12 +43,45 @@ describe("MyList tests", () => {
   });
 
   it("push test", () => {
-    //testEqual(new MyList(1, 2, 3, 4), l1.push(4));
-    testEqual(new MyList({}, {}, {}), l3.push({}));
+    testEqual(new MyList(1, 2, 3, 4), l1.clone().push(4));
+    testEqual(new MyList({}, {}, {}), l3.clone().push({}));
+    testEqual(new MyList<number>().push(1), new MyList(1));
   });
 
   it("shift test", () => {
-    testEqual(new MyList(0, 1, 2, 3), l1.shift(0));
-    //testEqual(new MyList("lol", "Hello", "world", "!"), l2.shift("lol"));
+    testEqual(new MyList(0, 1, 2, 3), l1.clone().shift(0));
+    testEqual(
+      new MyList("lol", "Hello", "world", "!"),
+      l2.clone().shift("lol")
+    );
+    testEqual(new MyList({ a: 3 }, {}, {}), l3.clone().shift({ a: 3 }));
+    testEqual(new MyList<number>(3), l4.clone().shift(3));
+  });
+
+  it("insert test", () => {
+    testEqual(new MyList(1, 0, 2, 3), l1.clone().insert(0, 1));
+    testEqual(
+      new MyList("Hello", "this", "world", "!"),
+      l2.clone().insert("this", 1)
+    );
+    testEqual(new MyList({ a: 3 }, {}, {}), l3.clone().insert({ a: 3 }, 0));
+
+    // TODO: make test with error out of range
+    // testEqual(new MyList<number>(3), l4.clone().shift(3));
+  });
+
+  it("search test", () => {
+    test(l1.search(3), 2);
+    test(l1.search(4), null);
+    test(l2.search("!"), 3);
+    test(l3.search({}), 0);
+    test(l4.search({}), null);
+  });
+
+  it("remove by index test", () => {
+    testEqual(new MyList(1, 3), l1.clone().removeByIndex(1));
+    // TODO: make test with error out of range
+    testEqual(new MyList("world", "!"), l2.clone().removeByIndex(0));
+    testEqual(new MyList({}, {}), l3.clone().removeByIndex(2));
   });
 });

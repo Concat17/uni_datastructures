@@ -7,10 +7,17 @@ export default class MyList<T> {
   constructor(...args: Array<T>) {
     // TODO: check constructor and refactor
     const first: MyListNode<T> = { value: args[0] };
-    this.first = first;
+    let prevElem = first;
     for (let i = 1; i < args.length; i++) {
-      this.push(args[i]);
+      const value = args[i];
+      const nextListElem: MyListNode<T> = { value: value };
+
+      nextListElem.prev = prevElem;
+      prevElem.next = nextListElem;
+
+      prevElem = nextListElem;
     }
+    this.first = first;
   }
 
   insertAfter(element, value) {
@@ -33,7 +40,14 @@ export default class MyList<T> {
     return count;
   }
 
-  push(value: T): this {
+  push(value: T): MyList<T> {
+    // if list is empty
+    if (!this.first.value) {
+      this.first = new MyListNode();
+      this.first.value = value;
+      return this;
+    }
+
     let node = this.first;
     while (node.next !== undefined) {
       node = node.next;
@@ -42,14 +56,29 @@ export default class MyList<T> {
     return this;
   }
 
-  shift(value: T): this {
+  shift(value: T): MyList<T> {
     const newFirst: MyListNode<T> = { value: value };
+
+    if (!this.first.value) {
+      this.first = newFirst;
+      return this;
+    }
 
     this.first.prev = newFirst;
     newFirst.next = this.first;
     this.first = newFirst;
 
     return this;
+  }
+
+  clone(): MyList<T> {
+    const clone = new MyList<T>(this.first.value);
+    let element = this.first.next;
+    while (element) {
+      clone.push(element.value);
+      element = element.next;
+    }
+    return clone;
   }
 
   isEqual(other: MyList<T>): boolean {
