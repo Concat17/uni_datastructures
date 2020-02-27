@@ -8,8 +8,11 @@ const l3 = new MyList({}, {}, {});
 const ll3 = new MyList({}, {}, {});
 const l4 = new MyList<number>();
 
-const lc1 = new MyList<number>().push(1);
-const lc2 = new MyList(1);
+console.log(l1.insert(0, 0).ToString());
+console.log(l2.ToString());
 
-console.log(l4.shift(1).ToString());
-console.log(lc2.ToString());
+// const lc1 = new MyList<number>().push(1);
+// const lc2 = new MyList(1);
+
+// console.log(l4.shift(1).ToString());
+// console.log(lc2.ToString());

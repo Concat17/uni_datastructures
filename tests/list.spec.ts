@@ -70,18 +70,18 @@ describe("MyList tests", () => {
     // testEqual(new MyList<number>(3), l4.clone().shift(3));
   });
 
-  it("search test", () => {
-    test(l1.search(3), 2);
-    test(l1.search(4), null);
-    test(l2.search("!"), 3);
-    test(l3.search({}), 0);
-    test(l4.search({}), null);
-  });
+  // it("search test", () => {
+  //   test(l1.search(3), 2);
+  //   test(l1.search(4), null);
+  //   test(l2.search("!"), 3);
+  //   test(l3.search({}), 0);
+  //   test(l4.search({}), null);
+  // });
 
-  it("remove by index test", () => {
-    testEqual(new MyList(1, 3), l1.clone().removeByIndex(1));
-    // TODO: make test with error out of range
-    testEqual(new MyList("world", "!"), l2.clone().removeByIndex(0));
-    testEqual(new MyList({}, {}), l3.clone().removeByIndex(2));
-  });
+  // it("remove by index test", () => {
+  //   testEqual(new MyList(1, 3), l1.clone().removeByIndex(1));
+  //   // TODO: make test with error out of range
+  //   testEqual(new MyList("world", "!"), l2.clone().removeByIndex(0));
+  //   testEqual(new MyList({}, {}), l3.clone().removeByIndex(2));
+  // });
 });

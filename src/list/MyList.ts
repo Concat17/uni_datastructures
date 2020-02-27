@@ -6,29 +6,28 @@ export default class MyList<T> {
 
   constructor(...args: Array<T>) {
     // TODO: check constructor and refactor
-    const first: MyListNode<T> = { value: args[0] };
-    let prevElem = first;
-    for (let i = 1; i < args.length; i++) {
-      const value = args[i];
-      const nextListElem: MyListNode<T> = { value: value };
-
-      nextListElem.prev = prevElem;
-      prevElem.next = nextListElem;
-
-      prevElem = nextListElem;
+    let tail: MyListNode<T> = null;
+    for (let i = 0; i < args.length; i++) {
+      const node: MyListNode<T> = { value: args[i] };
+      if (i === 0) {
+        this.first = node;
+        tail = node;
+        continue;
+      }
+      this.insertAfter(tail, args[i]);
+      tail = tail.next;
     }
-    this.first = first;
   }
 
   insertAfter(element, value) {
-    const nextElem: MyListNode<T> = { value: value };
+    const nextNode: MyListNode<T> = { value: value };
 
-    nextElem.prev = element;
-    element.next = nextElem;
+    nextNode.prev = element;
+    element.next = nextNode;
   }
 
   get Count(): number {
-    if (this.first.value === undefined) return 0;
+    if (this.first === undefined) return 0;
 
     let count = 0;
     let node = this.first;
@@ -42,7 +41,7 @@ export default class MyList<T> {
 
   push(value: T): MyList<T> {
     // if list is empty
-    if (!this.first.value) {
+    if (!this.first) {
       this.first = new MyListNode();
       this.first.value = value;
       return this;
@@ -59,7 +58,7 @@ export default class MyList<T> {
   shift(value: T): MyList<T> {
     const newFirst: MyListNode<T> = { value: value };
 
-    if (!this.first.value) {
+    if (!this.first) {
       this.first = newFirst;
       return this;
     }
@@ -71,12 +70,40 @@ export default class MyList<T> {
     return this;
   }
 
+  insert(value: T, index: number): MyList<T> {
+    if (index === 0) {
+      return this.shift(value);
+    }
+
+    if (this.Count - 1 < index) {
+      throw new Error("index out of range");
+    }
+
+    let count = 0;
+    let node = this.first;
+    while (count !== index) {
+      node = this.first.next;
+      count += 1;
+    }
+
+    const insertedNode: MyListNode<T> = { value: value };
+    node.prev.next = insertedNode;
+    insertedNode.prev = node.prev.next;
+
+    node.prev = insertedNode;
+    insertedNode.next = node;
+    return this;
+  }
+
   clone(): MyList<T> {
+    if (!this.first) {
+      return new MyList<T>();
+    }
     const clone = new MyList<T>(this.first.value);
-    let element = this.first.next;
-    while (element) {
-      clone.push(element.value);
-      element = element.next;
+    let node = this.first.next;
+    while (node) {
+      clone.push(node.value);
+      node = node.next;
     }
     return clone;
   }
