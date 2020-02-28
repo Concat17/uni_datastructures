@@ -82,17 +82,32 @@ export default class MyList<T> {
     let count = 0;
     let node = this.first;
     while (count !== index) {
-      node = this.first.next;
+      node = node.next;
       count += 1;
     }
 
     const insertedNode: MyListNode<T> = { value: value };
     node.prev.next = insertedNode;
     insertedNode.prev = node.prev.next;
-
     node.prev = insertedNode;
     insertedNode.next = node;
     return this;
+  }
+
+  search(value: T): number | null {
+    if (!this.first) {
+      return null;
+    }
+    let count = 0;
+    let node = this.first;
+    while (node) {
+      if (JSON.stringify(node.value) === JSON.stringify(value)) {
+        return count;
+      }
+      node = node.next;
+      count += 1;
+    }
+    return null;
   }
 
   clone(): MyList<T> {

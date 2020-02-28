@@ -8,7 +8,7 @@ const l3 = new MyList({}, {}, {});
 const ll3 = new MyList({}, {}, {});
 const l4 = new MyList<number>();
 
-console.log(l1.insert(0, 0).ToString());
+console.log(l3.search({}));
 console.log(l2.ToString());
 
 // const lc1 = new MyList<number>().push(1);

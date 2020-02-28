@@ -59,7 +59,7 @@ describe("MyList tests", () => {
   });
 
   it("insert test", () => {
-    testEqual(new MyList(1, 0, 2, 3), l1.clone().insert(0, 1));
+    testEqual(new MyList(1, 2, 0, 3), l1.clone().insert(0, 2));
     testEqual(
       new MyList("Hello", "this", "world", "!"),
       l2.clone().insert("this", 1)
@@ -67,16 +67,15 @@ describe("MyList tests", () => {
     testEqual(new MyList({ a: 3 }, {}, {}), l3.clone().insert({ a: 3 }, 0));
 
     // TODO: make test with error out of range
-    // testEqual(new MyList<number>(3), l4.clone().shift(3));
   });
 
-  // it("search test", () => {
-  //   test(l1.search(3), 2);
-  //   test(l1.search(4), null);
-  //   test(l2.search("!"), 3);
-  //   test(l3.search({}), 0);
-  //   test(l4.search({}), null);
-  // });
+  it("search test", () => {
+    test(l1.search(3), 2);
+    test(l1.search(4), null);
+    test(l2.search("!"), 2);
+    test(l3.search({}), 0);
+    test(l4.search(2), null);
+  });
 
   // it("remove by index test", () => {
   //   testEqual(new MyList(1, 3), l1.clone().removeByIndex(1));
