@@ -78,12 +78,12 @@ describe("MyList tests", () => {
     test(l4.search(2), null);
   });
 
-  // it("remove by index test", () => {
-  //   testEqual(new MyList(1, 3), l1.clone().removeByIndex(1));
-  //   // TODO: make test with error out of range
-  //   testEqual(new MyList("world", "!"), l2.clone().removeByIndex(0));
-  //   testEqual(new MyList({}, {}), l3.clone().removeByIndex(2));
-  // });
+  it("remove by index test", () => {
+    testEqual(new MyList(1, 3), l1.clone().removeByIndex(1));
+    // TODO: make test with error out of range
+    testEqual(new MyList("world", "!"), l2.clone().removeByIndex(0));
+    testEqual(new MyList({}), l3.clone().removeByIndex(1));
+  });
 
   // it("remove by value test", () => {;
   //    testEqual(new MyList(), l3.clone().removeByIndex(1));

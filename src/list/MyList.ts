@@ -74,7 +74,7 @@ export default class MyList<T> {
       return this.shift(value);
     }
 
-    if (this.Count - 1 < index) {
+    if (this.Count - 1 < index || index < 0) {
       throw new Error("index out of range");
     }
 
@@ -109,9 +109,29 @@ export default class MyList<T> {
     return null;
   }
 
-  // removeByIndex(index: number):  MyList<T>{
-  //   if()
-  // }
+  removeByIndex(index: number): MyList<T> {
+    if (this.Count - 1 < index || index < 0) {
+      throw new Error("index out of range");
+    }
+
+    if (index === 0) {
+      this.first = this.first.next;
+      return this;
+    }
+
+    let node = this.first;
+    for (let i = 0; i < index; i++) {
+      node = node.next;
+    }
+
+    const prev = node.prev;
+    const next = node.next;
+    if (next) {
+      next.prev = prev;
+    }
+    prev.next = next;
+    return this;
+  }
 
   clone(): MyList<T> {
     if (!this.first) {
