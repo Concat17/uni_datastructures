@@ -16,6 +16,7 @@ describe("MyList tests", () => {
   const l2 = new MyList("Hello", "world", "!");
   const l3 = new MyList({}, {});
   const l4 = new MyList<number>();
+  const l5 = new MyList(1, 4, 1, 5, 6, 1);
 
   it("toString test", () => {
     test("1 2 3", l1.ToString());
@@ -82,5 +83,10 @@ describe("MyList tests", () => {
   //   // TODO: make test with error out of range
   //   testEqual(new MyList("world", "!"), l2.clone().removeByIndex(0));
   //   testEqual(new MyList({}, {}), l3.clone().removeByIndex(2));
+  // });
+
+  // it("remove by value test", () => {;
+  //    testEqual(new MyList(), l3.clone().removeByIndex(1));
+  //    testEqual(new MyList(4, 5, 6), l5.clone().removeByIndex(1));
   // });
 });

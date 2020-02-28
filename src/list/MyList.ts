@@ -8,7 +8,7 @@ export default class MyList<T> {
     // TODO: check constructor and refactor
     let tail: MyListNode<T> = null;
     for (let i = 0; i < args.length; i++) {
-      const node: MyListNode<T> = { value: args[i] };
+      const node = new MyListNode(args[i]);
       if (i === 0) {
         this.first = node;
         tail = node;
@@ -20,7 +20,7 @@ export default class MyList<T> {
   }
 
   insertAfter(element, value) {
-    const nextNode: MyListNode<T> = { value: value };
+    const nextNode = new MyListNode(value);
 
     nextNode.prev = element;
     element.next = nextNode;
@@ -40,7 +40,6 @@ export default class MyList<T> {
   }
 
   push(value: T): MyList<T> {
-    // if list is empty
     if (!this.first) {
       this.first = new MyListNode();
       this.first.value = value;
@@ -56,7 +55,7 @@ export default class MyList<T> {
   }
 
   shift(value: T): MyList<T> {
-    const newFirst: MyListNode<T> = { value: value };
+    const newFirst = new MyListNode(value);
 
     if (!this.first) {
       this.first = newFirst;
@@ -86,7 +85,7 @@ export default class MyList<T> {
       count += 1;
     }
 
-    const insertedNode: MyListNode<T> = { value: value };
+    const insertedNode = new MyListNode(value);
     node.prev.next = insertedNode;
     insertedNode.prev = node.prev.next;
     node.prev = insertedNode;
@@ -101,7 +100,7 @@ export default class MyList<T> {
     let count = 0;
     let node = this.first;
     while (node) {
-      if (JSON.stringify(node.value) === JSON.stringify(value)) {
+      if (node.isValueEqual(value)) {
         return count;
       }
       node = node.next;
@@ -109,6 +108,10 @@ export default class MyList<T> {
     }
     return null;
   }
+
+  // removeByIndex(index: number):  MyList<T>{
+  //   if()
+  // }
 
   clone(): MyList<T> {
     if (!this.first) {
@@ -131,9 +134,7 @@ export default class MyList<T> {
     let currentOther = other.first;
 
     while (currentThis !== undefined) {
-      if (
-        JSON.stringify(currentThis.value) !== JSON.stringify(currentOther.value)
-      ) {
+      if (!currentThis.isValueEqual(currentOther.value)) {
         return false;
       }
 
