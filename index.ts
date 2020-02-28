@@ -8,7 +8,7 @@ const l3 = new MyList({}, {});
 const ll3 = new MyList({}, {}, {});
 const l4 = new MyList<number>();
 
-console.log(l3.removeByIndex(2).ToString());
+console.log(l3.removeByIndex(1).ToString());
 console.log(l2.ToString());
 
 // const lc1 = new MyList<number>().push(1);

@@ -133,6 +133,21 @@ export default class MyList<T> {
     return this;
   }
 
+  removeByValue(value: T): MyList<T> {
+    const newList = new MyList<T>();
+
+    let node = this.first.next;
+
+    while (node) {
+      if (!node.isValueEqual(value)) {
+        newList.push(node.value);
+      }
+      node = node.next;
+    }
+    this.first = newList.first;
+    return this;
+  }
+
   clone(): MyList<T> {
     if (!this.first) {
       return new MyList<T>();

@@ -85,8 +85,8 @@ describe("MyList tests", () => {
     testEqual(new MyList({}), l3.clone().removeByIndex(1));
   });
 
-  // it("remove by value test", () => {;
-  //    testEqual(new MyList(), l3.clone().removeByIndex(1));
-  //    testEqual(new MyList(4, 5, 6), l5.clone().removeByIndex(1));
-  // });
+  it("remove by value test", () => {
+    testEqual(new MyList(), l3.clone().removeByIndex(1));
+    testEqual(new MyList(4, 5, 6), l5.clone().removeByIndex(1));
+  });
 });
