@@ -2,10 +2,8 @@ import MyListNode from "./MyListNode";
 
 export default class MyList<T> {
   first?: MyListNode<T>;
-  // count:number = 0
 
   constructor(...args: Array<T>) {
-    // TODO: check constructor and refactor
     let tail: MyListNode<T> = null;
     for (let i = 0; i < args.length; i++) {
       const node = new MyListNode(args[i]);

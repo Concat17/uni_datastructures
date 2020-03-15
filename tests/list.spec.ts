@@ -1,4 +1,3 @@
-// import { MyList, MyListToString } from "../src/list";
 import MyList from "../src/list/MyList";
 import { expect } from "chai";
 import "mocha";
@@ -66,8 +65,7 @@ describe("MyList tests", () => {
       l2.clone().insert("this", 1)
     );
     testEqual(new MyList({ a: 3 }, {}, {}), l3.clone().insert({ a: 3 }, 0));
-
-    // TODO: make test with error out of range
+    expect(() => l1.insert(2, 10)).to.throw("index out of range");
   });
 
   it("search test", () => {
@@ -80,7 +78,7 @@ describe("MyList tests", () => {
 
   it("remove by index test", () => {
     testEqual(new MyList(1, 3), l1.clone().removeByIndex(1));
-    // TODO: make test with error out of range
+    expect(() => l1.removeByIndex(10)).to.throw("index out of range");
     testEqual(new MyList("world", "!"), l2.clone().removeByIndex(0));
     testEqual(new MyList({}), l3.clone().removeByIndex(1));
   });
