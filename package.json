@@ -9,7 +9,8 @@
     "typescript": "^3.8.2"
   },
   "scripts": {
-    "test": "mocha -r ts-node/register tests/**/*.spec.ts"
+    "test": "mocha -r ts-node/register tests/**/*.spec.ts",
+    "start": "ts-node index.ts"
   },
   "devDependencies": {
     "@types/chai": "^4.2.9",
